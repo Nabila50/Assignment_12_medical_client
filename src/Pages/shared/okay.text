@@ -1,0 +1,8 @@
+// GET /camps/popular
+app.get("/camps/popular", async (req, res) => {
+  const camps = await Camp.find()
+    .sort({ participantCount: -1 }) // highest first
+    .limit(6);
+
+  res.json(camps);
+});
