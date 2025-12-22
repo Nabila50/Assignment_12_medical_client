@@ -16,10 +16,9 @@ const ParticipantRegistration= ({ camp, user }) => {
   });
 
   const {createUser} = useAuth()
-  // handle register on button click
+ 
   const handleRegister = (event) => {
-    event.preventDefault(); // prevent default form submission
-
+    event.preventDefault(); 
     const formData = {
       campName: camp?.campName,
       campFees: camp?.campFees,
@@ -27,6 +26,10 @@ const ParticipantRegistration= ({ camp, user }) => {
       healthcareProfessional: camp?.healthcareProfessional,
       participantName: user?.name,
       participantEmail: user?.email,
+      organizerEmail: camp.organizerEmail, // ✅ ADD THIS
+      organizerName: camp.organizerName,
+      paymentStatus: "unpaid",
+      confirmationStatus: "pending",
       // You can get additional inputs from the form here using document.querySelector or better: useForm values
       creation_date: new Date().toISOString(),
     };
@@ -177,6 +180,7 @@ const ParticipantRegistration= ({ camp, user }) => {
             </p>
           )}
         </div>
+       
 
         {/* Register Button */}
         <div className="lg:col-span-2 mt-4">

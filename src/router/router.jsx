@@ -6,7 +6,6 @@ import AuthLayout from "../Layouts/AuthLayout";
 import Login from "../Pages/Authentication/Login";
 import Register from "../Pages/Authentication/Register";
 import AddCamp from "../Pages/AddCamp";
-import PrivateRoute from "../assets/Routes/PrivateRoute";
 import DashboardLayout from "../Layouts/DashboardLayout";
 import ManageCamps from "../Pages/Org-DashboardPages/ManageCamps";
 import UpdateCamp from "../Pages/Org-DashboardPages/UpdateCamps";
@@ -21,6 +20,14 @@ import RegisteredCamps from "../Pages/Part-DashboardPages/RegisteredCamps";
 import PaymentHistory from "../Pages/Part-DashboardPages/PaymentHistory";
 import ParticipantRegistration from "../Pages/ParticipantRegister";
 import PendingParticipants from "../Pages/Part-DashboardPages/PendingParticipants";
+import ActiveParticipant from "../Pages/Part-DashboardPages/ActiveParticipant";
+import ParticipantProfile from "../Pages/Part-DashboardPages/ParticipantProfile";
+import MakeOrganizer from "../Pages/Org-DashboardPages/MakeOrganizer";
+import PrivateRoute from "../Routes/PrivateRoute";
+import Forbidden from "../Pages/Forbidden";
+import OrganizerRoute from "../Routes/OrganizerRoute";
+import ManageRegisteredCamps from "../Pages/Org-DashboardPages/ManageRegisteredCamps";
+import Payment from "../Pages/Org-DashboardPages/Payment";
 // import Home from "../Pages/Home/Home";
 
 export const router = createBrowserRouter([
@@ -46,11 +53,15 @@ export const router = createBrowserRouter([
       },
       {
         path: "/camp-details/:id",
-        element: <CampDetails /> 
+        element: <CampDetails />,
       },
       {
         path: "participantRegistration",
-        Component: ParticipantRegistration
+        Component: ParticipantRegistration,
+      },
+      {
+        path: 'forbidden',
+        Component: Forbidden
       }
     ],
   },
@@ -86,15 +97,27 @@ export const router = createBrowserRouter([
       },
       {
         path: "/orgDashboard/update-camp/:campId",
-        element: <UpdateCamp></UpdateCamp>,
+        element: <OrganizerRoute><UpdateCamp></UpdateCamp></OrganizerRoute>,
       },
       {
-        path:'organizer-profile',
-        Component: OrganizerProfile
+        path: "organizer-profile",
+        Component: OrganizerProfile,
+      },
+      {
+        path: "make-organizer",
+        element: <OrganizerRoute><MakeOrganizer></MakeOrganizer></OrganizerRoute>
+      },
+      {
+        path: 'manageRegisteredCamps',
+        Component: ManageRegisteredCamps
+      },
+      {
+        path: 'payment/:id',
+        Component: Payment
       }
     ],
   },
-    {
+  {
     path: "/partiDashboard",
     element: (
       <PrivateRoute>
@@ -102,25 +125,30 @@ export const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
-       {
+      {
         path: "analytics",
-        Component: Analytics
+        Component: Analytics,
       },
-      
+      {
+        path: "participantProfile",
+        Component: ParticipantProfile,
+      },
       {
         path: "registeredCamps",
-        Component: RegisteredCamps
+        Component: RegisteredCamps,
       },
       {
         path: "paymentHistory",
-        Component: PaymentHistory
+        Component: PaymentHistory,
       },
       {
-        path:'pendingParticipants',
-        Component: PendingParticipants
-      }
-     
-      
+        path: "pendingParticipants",
+        element: <OrganizerRoute><PendingParticipants></PendingParticipants></OrganizerRoute>
+      },
+      {
+        path: "activeParticipant",
+        element: <OrganizerRoute><ActiveParticipant></ActiveParticipant></OrganizerRoute>
+      },
     ],
   },
 ]);

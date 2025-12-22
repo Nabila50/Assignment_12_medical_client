@@ -1,8 +1,12 @@
 import React from "react";
 import { Link, NavLink, Outlet } from "react-router";
 import Logo from "../Pages/Home/Logo";
+import Footer from "../Pages/shared/Footer";
+import useUserRole from "../hooks/useUserRole";
 
 const PartiDashboardLayout = () => {
+   const { role, roleLoading } = useUserRole();
+  console.log(role);
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -34,6 +38,7 @@ const PartiDashboardLayout = () => {
 
         {/* Page content here */}
         <Outlet></Outlet>
+        <Footer></Footer>
       </div>
       <div className="drawer-side">
         <label
@@ -64,8 +69,10 @@ const PartiDashboardLayout = () => {
               Payment History
             </NavLink>
           </li>
-          <li>
-            <NavLink to="/partiDashboard/activeParticipants">
+           { !roleLoading && role ==='organizer' &&
+           <>
+           <li>
+            <NavLink to="/partiDashboard/activeParticipant">
               Active Participants
             </NavLink>
           </li>
@@ -75,9 +82,14 @@ const PartiDashboardLayout = () => {
               Pending Participants
             </NavLink>
           </li>
+           </>
+           }
+          
         </ul>
       </div>
+     
     </div>
+    
   );
 };
 

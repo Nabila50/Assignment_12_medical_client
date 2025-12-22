@@ -1,5 +1,5 @@
 import React from 'react';
-import useAuth from '../../hooks/useAuth';
+import useAuth from '../hooks/useAuth';
 import { Navigate } from 'react-router';
 
 const PrivateRoute = ({children}) => {
@@ -11,7 +11,7 @@ const PrivateRoute = ({children}) => {
     }
 
     if(!user){
-        <Navigate to='/login'></Navigate>
+        <Navigate state={{ from: location.pathname}} to='/login'></Navigate>
     }
 
 

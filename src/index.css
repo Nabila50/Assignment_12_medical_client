@@ -23,3 +23,7 @@
 .base-color {
   color: #00bcd5;
 }
+
+.custom-zebra {
+  --table-zebra-stripe: #97edf9;
+}

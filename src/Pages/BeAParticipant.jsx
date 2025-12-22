@@ -27,7 +27,11 @@ const beAParticipant = ({ camp, user }) => {
       healthcareProfessional: camp?.healthcareProfessional,
       participantName: user?.name,
       participantEmail: user?.email,
-      // You can get additional inputs from the form here using document.querySelector or better: useForm values
+      organizerEmail: camp.organizerEmail, // ✅ ADD THIS
+      organizerName: camp.organizerName,
+      paymentStatus: "unpaid",
+      confirmationStatus: "pending",
+  
       creation_date: new Date().toISOString(),
     };
 
@@ -153,6 +157,22 @@ const beAParticipant = ({ camp, user }) => {
             <p className="text-red-600 text-sm">
               Emergency contact is required
             </p>
+          )}
+        </div>
+
+        <div>
+          <label className="label">Payment Status</label>
+          <select
+            className="select select-bordered w-full"
+            {...register("gender", { required: true })}
+          >
+            <option value="">Select Payment Status</option>
+            <option>Paid</option>
+            <option>Unpaid</option>
+             
+          </select>
+          {errors.gender && (
+            <p className="text-red-600 text-sm">Payment status is required</p>
           )}
         </div>
 

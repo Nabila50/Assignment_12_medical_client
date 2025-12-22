@@ -22,24 +22,30 @@ const PendingParticipants = () => {
     },
   });
 
- const handleApprove = async (id) => {
+  const handleDecision = async (id, action, email)=>{
+    const confirm = await Swal.fire({
+      title: `${action === "approved" ? "Approve" : "Reject"} Application?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      cancelButtonText: "Cancel",
+    });
+
+    if (!confirm.isConfirmed) return;
+
   try {
+    const status = action === "approved" ? "active" : "rejected";
     const res = await axiosSecure.patch(`/participants/${id}/status`, {
-      status: "active",
+      status,
+      email
     });
 
       refetch();
-
-    if (res.data.modifiedCount > 0) {
-      Swal.fire({
-        icon: "success",
-        title: "Approved!",
-        text: "Participant has been approved successfully",
-      });
+ 
+      Swal.fire("Success", `Participant ${action} successfully`, "Success");
    
       // setSelectedParticipant(null);
-    }
-  } catch (error) {
+    }catch (error) {
     Swal.fire({
       icon: "error",
       title: "Error",
@@ -107,13 +113,13 @@ const PendingParticipants = () => {
                   </button>
                   <button
                     className="btn btn-sm btn-success"
-                    onClick={() => handleApprove(p._id)}
+                    onClick={() => handleDecision(p._id, 'approved', p.participantEmail)}
                   >
                     Approve
                   </button>
                   <button
                     className="btn btn-sm btn-error"
-                    onClick={() => handleCancel(p._id)}
+                    onClick={() => handleDecision(p._id, 'reject', p.participantEmail)}
                   >
                     Cancel
                   </button>
@@ -148,13 +154,13 @@ const PendingParticipants = () => {
             <div className="flex justify-end gap-2 mt-6">
               <button
                 className="btn btn-success"
-                onClick={() => handleApprove(selectedParticipant._id)}
+                onClick={() => handleDecision(selectedParticipant._id)}
               >
                 Accept
               </button>
               <button
                 className="btn btn-error"
-                onClick={() => handleCancel(selectedParticipant._id)}
+                onClick={() => handleDecision(selectedParticipant._id)}
               >
                 Cancel
               </button>
@@ -169,7 +175,7 @@ const PendingParticipants = () => {
         )}
       </Modal>
     </div>
-  );
-};
+  );}
+
 
 export default PendingParticipants;

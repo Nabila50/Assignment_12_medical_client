@@ -56,8 +56,8 @@ const Login = () => {
 
             <div>
               New in here?
-              <Link
-                to="/register"
+              <Link state={{from}}
+                to="/register" 
                 className="link link-hover text-[#00bcd5] font-bold"
               >
                 {" "}

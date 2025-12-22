@@ -1,10 +1,13 @@
 import React from "react";
 import { Link, Links, NavLink, Outlet } from "react-router";
 import Logo from "../Pages/Home/Logo";
+import useUserRole from "../hooks/useUserRole";
 
 const DashboardLayout = () => {
+  const { role, roleLoading } = useUserRole();
+  console.log(role);
   return (
-   <div className="drawer lg:drawer-open">
+    <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col">
         <div className="navbar bg-base-300 w-full  lg:hidden">
@@ -31,7 +34,6 @@ const DashboardLayout = () => {
           </div>
         </div>
         <div className="mx-2 flex-1 px-2 lg:hidden">DashBoard</div>
-   
 
         {/* Page content here */}
         <Outlet></Outlet>
@@ -44,19 +46,39 @@ const DashboardLayout = () => {
         ></label>
         <ul className="menu bg-base-200 min-h-full w-80 p-4">
           {/* Sidebar content here */}
-          <li className="w-30 h-30"><Logo></Logo></li>
-          <li>
-            <NavLink to='/orgDashboard/organizer-profile'>Organizer Profile</NavLink>
+          <li className="w-30 h-30">
+            <Logo></Logo>
           </li>
           <li>
-            <NavLink to='/orgDashboard/addCamp'>Add A Camp</NavLink>
+            <NavLink to="/orgDashboard/organizer-profile">
+              Organizer Profile
+            </NavLink>
           </li>
           <li>
-            <NavLink to='/orgDashboard/manageCamps'>Manage Camps</NavLink>
+            <NavLink to="/orgDashboard/addCamp">Add A Camp</NavLink>
           </li>
-          <li>
-            <NavLink to='/orgDashboard/manageCamps'>Manage Registered Camps</NavLink>
-          </li>
+          { !roleLoading && role ==='organizer' &&
+            <>
+              <li>
+                <NavLink to="/orgDashboard/make-organizer">
+                  Make Organizer
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/orgDashboard/manageCamps">Manage Camps</NavLink>
+              </li>
+              <li>
+                <NavLink to="/orgDashboard/manageRegisteredCamps">
+                  Manage Registered Camps
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/orgDashboard/payment">
+                  Payment
+                </NavLink>
+              </li>
+            </>
+          }
         </ul>
       </div>
     </div>
