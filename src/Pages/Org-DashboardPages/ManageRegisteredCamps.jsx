@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
@@ -8,6 +8,7 @@ const ManageRegisteredCamps = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const {
     data: participants = [],
@@ -20,43 +21,42 @@ const ManageRegisteredCamps = () => {
       const res = await axiosSecure.get(
         `/organizer/participants?email=${user.email}`
       );
-      return res.data;
+      return res.data.participants;
     },
   });
 
-//   handle pay-----------
+  //   handle pay-----------
 
-  const handlePay = async (id) => {
-    console.log('proceed to payment')
-    navigate(`/orgDashboard/payment/${id}`)
-//   try {
-   
-//     const res = await axiosSecure.post("/create-payment-session", {
-//       participantId: participant._id,
-//       campName: participant.campName,
-//       campFees: participant.campFees,
-//       participantEmail: participant.participantEmail,
-//     });
+  const handlePay = (id) => {
+    navigate(`/orgDashboard/payment/${id}`, {
+      state: { from: "manageCamps" },
+    });
+  };
+  //   try {
 
-//     // 2️⃣ Redirect to Stripe Checkout
-//     const stripe = await stripePromise;
-//     await stripe.redirectToCheckout({
-//       sessionId: res.data.sessionId,
-//     });
+  //     const res = await axiosSecure.post("/create-payment-session", {
+  //       participantId: participant._id,
+  //       campName: participant.campName,
+  //       campFees: participant.campFees,
+  //       participantEmail: participant.participantEmail,
+  //     });
 
-//   } catch (error) {
-//     console.error("Payment error:", error);
-//     Swal.fire("Error", "Payment failed. Try again.", "error");
-//   }
-};
+  //     // 2️⃣ Redirect to Stripe Checkout
+  //     const stripe = await stripePromise;
+  //     await stripe.redirectToCheckout({
+  //       sessionId: res.data.sessionId,
+  //     });
 
-// -------------handle View---------------
+  //   } catch (error) {
+  //     console.error("Payment error:", error);
+  //     Swal.fire("Error", "Payment failed. Try again.", "error");
+  //   }
 
-const handleView = (id) =>{
+  // -------------handle View---------------
 
-}
+  const handleView = (id) => {};
 
-// ---------handle Confirm----------------
+  // ---------handle Confirm----------------
 
   const handleConfirm = async (id) => {
     await axiosSecure.patch(`/organizer/confirm/${id}`);
@@ -153,18 +153,14 @@ const handleView = (id) =>{
                     </button>
 
                     {/* Pay (disabled for organizer) */}
-                    {
-                        p.paymentStatus === 'unpaid' &&(
-                            <button onClick={()=> handlePay(p._id)}
-                       
-                      className="btn btn-xs btn-success opacity-60 cursor-not-allowed"
-                    >
-                      Pay
-                    </button>
-
+                    {p.paymentStatus === "unpaid" && (
+                      <button
+                        onClick={() => handlePay(p._id)}
+                        className="btn btn-xs btn-success opacity-60"
+                      >
+                        Pay
+                      </button>
                     )}
-                    
-                    
 
                     {/* Delete */}
                     <button

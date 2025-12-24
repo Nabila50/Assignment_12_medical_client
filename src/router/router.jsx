@@ -112,8 +112,8 @@ export const router = createBrowserRouter([
         Component: ManageRegisteredCamps
       },
       {
-        path: 'payment/:id',
-        Component: Payment
+        path: 'payment/:campId',
+        element: <Payment></Payment>
       }
     ],
   },
