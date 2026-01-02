@@ -2,6 +2,7 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import React from 'react';
 import PaymentForm from './PaymentForm';
+import UserPaymentHistory from '../Part-DashboardPages/UserPaymentHistory';
 // import PaymentForm from './PaymentForm';
 // import PaymentForm from '.';
 // import PaymentForm from '../Org-DashboardPages/PaymentForm';
@@ -14,6 +15,7 @@ const Payment = () => {
   return (
      <Elements stripe = {stripePromise} >
       <PaymentForm></PaymentForm>
+    
       
      </Elements>
   );

@@ -53,7 +53,7 @@ const beAParticipant = ({ camp, user }) => {
 
   return (
     <div className="p-8">
-      <h1 className="text-3xl font-bold text-center">
+      <h1 className="text-3xl font-bold text-center text-[#00bcd5]">
         Participant Registration Form
       </h1>
       <form className="grid grid-cols-1 lg:grid-cols-2 gap-4 pt-10">

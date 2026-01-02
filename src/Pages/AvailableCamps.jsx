@@ -2,13 +2,13 @@
 import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router";
-import useAxiosSecure from "../hooks/useAxiosSecure";
+// import useAxiosSecure from "../hooks/useAxiosSecure";
 import useAuth from "../hooks/useAuth";
 import useAxios from "../hooks/useAxios";
 
 const AvailableCamps = () => {
   const {user} = useAuth();
-  const axiosSecure = useAxios();
+  const axiosInstance = useAxios();
 
   // ---------------- UI States ----------------
   const [searchText, setSearchText] = useState("");
@@ -19,7 +19,7 @@ const AvailableCamps = () => {
   const { data: camps = [], isLoading } = useQuery({
     queryKey: ["availableCamps"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/addCamps/all");
+      const res = await axiosInstance.get("/addCamps/all");
       return res.data;
     },
   });
@@ -36,7 +36,7 @@ const AvailableCamps = () => {
       result = result.filter(
         (c) =>
           c.campName.toLowerCase().includes(t) ||
-          c.location.toLowerCase().includes(t) ||
+          c.location?.toLowerCase().includes(t) ||
           c.healthcareProfessional?.toLowerCase().includes(t)
       );
     }
@@ -49,7 +49,9 @@ const AvailableCamps = () => {
     }
 
     if (sortOption === "fees") {
-      result.sort((a, b) => (a.fees || 0) - (b.fees || 0));
+      result.sort(
+        (a, b) => Number(a.campFees || 0) - Number(b.campFees || 0)
+      );
     }
 
     if (sortOption === "alphabetical") {
@@ -107,7 +109,7 @@ const AvailableCamps = () => {
           >
             <figure>
               <img
-                src={camp.image}
+                src={camp.image || '/placeholder.jpg'}
                 alt={camp.campName}
                 className="h-48 w-full object-cover rounded-lg"
               />
@@ -122,7 +124,7 @@ const AvailableCamps = () => {
                 <strong>Healthcare Professional:</strong>{" "}
                 {camp.healthcareProfessional}
               </p>
-              <p><strong>Participants:</strong> {camp.participantCount || 0}</p>
+              {/* <p><strong>Participants:</strong> {camp.participantCount || 0}</p> */}
               <p className="text-sm mt-2">
                 {camp.description?.slice(0, 80)}...
               </p>

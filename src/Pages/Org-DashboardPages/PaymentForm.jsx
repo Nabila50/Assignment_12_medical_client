@@ -9,7 +9,7 @@ import useAuth from "../../hooks/useAuth";
 const PaymentForm = () => {
   const stripe = useStripe();
   const elements = useElements();
-  const { campId } = useParams();
+  const { participantId } = useParams();
   const axiosSecure = useAxios();
   const location = useLocation();
   const navigate = useNavigate();
@@ -17,25 +17,21 @@ const PaymentForm = () => {
   const { user } = useAuth();
   const [error, setError] = useState("");
 
-  const { isPending, data: campInfo } = useQuery({
-    queryKey: ["camps", campId],
-    enabled: !!campId,
+  const { isPending, data: participant } = useQuery({
+    queryKey: ["participant", participantId],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/camps/${campId}`);
+      const res = await axiosSecure.get(`/participants/${participantId}`);
       return res.data;
     },
   });
 
   if (isPending) {
-    return <p className="text-center">Loading camp info...</p>;
+    return <p className="text-center">Loading Participant info...</p>;
   }
 
-  // if (!campInfo?._id) {
-  //   return <p className="text-center text-red-500">Camp not found</p>;
-  // }
-
-  console.log(campInfo);
-  const amount = campInfo.campFees;
+ 
+  // console.log(campInfo);
+  const amount = participant.campFees;
   const amountInCents = amount * 100;
   console.log(amountInCents);
 
@@ -63,7 +59,7 @@ const PaymentForm = () => {
 
     const res = await axiosSecure.post("create-payment-intent", {
       amountInCents,
-      campId,
+      participantId,
     });
 
     const clientSecret = res.data.clientSecret;
@@ -86,14 +82,14 @@ const PaymentForm = () => {
         console.log("payment succeeded!");
         console.log(result);
         const paymentData = {
-          participantId: user.participantId,
-          participantEmail: user.email,
-          participantName: user.displayName,
-          campId,
-          campName: campInfo.campName,
-          amount: campInfo.campFees,
+          participantId,
+          participantEmail: participant.participantEmail,
+          participantName: participant.participantName,
+          campId: participant.participantId,
+          campName: participant.campName,
+          amount: participant.campFees,
           paymentIntentId: result.paymentIntent.id,
-          paymentMethod: result.paymentIntent.payment_method_types[0], // usually "card"
+          paymentMethod: "card",
         };
 
         const paymentRes = await axiosSecure.post("/payments", paymentData);
@@ -122,7 +118,7 @@ const PaymentForm = () => {
       className="space-y-4 bg-color p-6 rounded-xl shadow-md w-full max-w-md mx-auto"
     >
       <h3 className="text-xl font-bold text-center">
-        Pay for {campInfo.campName}
+        Pay for {participant.campName}
       </h3>
 
       <CardElement className="p-2 border rounded" />

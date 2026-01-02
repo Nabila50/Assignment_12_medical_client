@@ -31,10 +31,7 @@ const Navbar = () => {
         <NavLink to="availableCamps">Available Camps</NavLink>
       </li>
       <li className="link-hover text-[#00bcd5] font-bold">
-        <NavLink to="/">Join US </NavLink>
-      </li>
-      <li className="link-hover text-[#00bcd5] font-bold">
-        <NavLink to="beAParticipant">Be A Participant </NavLink>
+        <NavLink to="beAParticipant">Join Us </NavLink>
       </li>
      
      {
@@ -43,7 +40,7 @@ const Navbar = () => {
         {!roleLoading && role ==='organizer' &&  (
         <>
           <li className="link-hover text-[#00bcd5] font-bold">
-            <NavLink to="/orgDashboard">Organizer Dashboard </NavLink>
+            <NavLink to="/orgDashboard/organizer-profile">Organizer Dashboard </NavLink>
           </li>   
            
         </>

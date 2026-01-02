@@ -113,7 +113,7 @@ const PendingParticipants = () => {
                   </button>
                   <button
                     className="btn btn-sm btn-success"
-                    onClick={() => handleDecision(p._id, 'approved', p.participantEmail)}
+                    onClick={() => handleDecision(p._id, 'approved', p.organizerEmail)}
                   >
                     Approve
                   </button>

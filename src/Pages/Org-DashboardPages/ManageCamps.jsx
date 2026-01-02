@@ -55,25 +55,11 @@ const ManageCamps = () => {
       }
     }
   };
-
-  // ---------------- UPDATE A CAMP ----------------
-  // const handleUpdate = (id) => {
-  //   Swal.fire({
-  //     title: "Update Feature Coming!",
-  //     text: "You can navigate to update page or open a modal.",
-  //     icon: "info",
-  //   });
-
     
 
 const handleUpdate = (id) => {
   navigate(`/orgDashboard/update-camp/${id}`);
 };
-
-    // Example navigation if you have update page
-    // navigate(`/dashboard/update-camp/${id}`);
-  
-  // if (isLoading) return <p>Loading camps...</p>;
 
   return (
     <div className="p-6">
@@ -102,17 +88,17 @@ const handleUpdate = (id) => {
                 <td>{camp.dateTime}</td>
                 <td>{camp.location}</td>
                 <td>{camp.healthcareProfessional}</td>
-                <td className="space-x-2">
+                <td className="space-x-2 flex">
                   <button
                     onClick={() => handleUpdate(camp._id)}
-                    className="btn btn-sm btn-info"
+                    className="btn btn-sm btn-info font-bold"
                   >
                     Update
                   </button>
 
                   <button
                     onClick={() => handleDelete(camp._id)}
-                    className="btn btn-sm btn-error"
+                    className="btn btn-sm bg-red-500 font-bold"
                   >
                     Delete
                   </button>

@@ -11,7 +11,7 @@ const OrganizerProfile = () => {
   const { user } = useAuth(); // logged-in organizer
   const email = user?.email;
 
-  // ---------------- Fetch Organizer Profile ----------------
+  
   const { data: organizer = {}, isLoading } = useQuery({
     queryKey: ["organizerProfile", email],
     queryFn: async () => {

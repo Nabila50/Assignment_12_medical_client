@@ -17,7 +17,7 @@ import PartiDashboardLayout from "../Layouts/PartiDashboardLayout";
 import BeAParticipant from "../Pages/BeAParticipant";
 import Analytics from "../Pages/Part-DashboardPages/Analytics";
 import RegisteredCamps from "../Pages/Part-DashboardPages/RegisteredCamps";
-import PaymentHistory from "../Pages/Part-DashboardPages/PaymentHistory";
+// import PaymentHistory from "../Pages/Part-DashboardPages/PaymentHistory";
 import ParticipantRegistration from "../Pages/ParticipantRegister";
 import PendingParticipants from "../Pages/Part-DashboardPages/PendingParticipants";
 import ActiveParticipant from "../Pages/Part-DashboardPages/ActiveParticipant";
@@ -28,6 +28,10 @@ import Forbidden from "../Pages/Forbidden";
 import OrganizerRoute from "../Routes/OrganizerRoute";
 import ManageRegisteredCamps from "../Pages/Org-DashboardPages/ManageRegisteredCamps";
 import Payment from "../Pages/Org-DashboardPages/Payment";
+import PaymentHistory from "../Pages/Org-DashboardPages/PaymentHistory";
+import UserPaymentHistory from "../Pages/Part-DashboardPages/UserPaymentHistory";
+import ParticipantPayment from "../Pages/Part-DashboardPages/ParticipantPayment";
+import FeedbackRating from "../Pages/shared/FeedbackRating";
 // import Home from "../Pages/Home/Home";
 
 export const router = createBrowserRouter([
@@ -77,6 +81,10 @@ export const router = createBrowserRouter([
         path: "register",
         Component: Register,
       },
+      {
+        path: 'dashboard/feedback/:id',
+        Component: FeedbackRating,
+      },
     ],
   },
   {
@@ -112,9 +120,13 @@ export const router = createBrowserRouter([
         Component: ManageRegisteredCamps
       },
       {
-        path: 'payment/:campId',
+        path: '/orgDashboard/payment/:participantId',
         element: <Payment></Payment>
-      }
+      },
+      {
+        path:'paymentHistory',
+        Component: PaymentHistory
+      },
     ],
   },
   {
@@ -138,9 +150,14 @@ export const router = createBrowserRouter([
         Component: RegisteredCamps,
       },
       {
-        path: "paymentHistory",
-        Component: PaymentHistory,
+        path: "userPaymentHistory",
+        Component: UserPaymentHistory,
       },
+      {
+        path: 'participantPayment',
+        Component: ParticipantPayment
+      },
+      
       {
         path: "pendingParticipants",
         element: <OrganizerRoute><PendingParticipants></PendingParticipants></OrganizerRoute>

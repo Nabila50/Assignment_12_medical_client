@@ -8,7 +8,7 @@ const PartiDashboardLayout = () => {
    const { role, roleLoading } = useUserRole();
   console.log(role);
   return (
-    <div className="drawer lg:drawer-open">
+    <div className="drawer lg:drawer-open ">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col">
         <div className="navbar bg-base-300 w-full  lg:hidden">
@@ -46,42 +46,49 @@ const PartiDashboardLayout = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu bg-base-200 min-h-full w-80 p-4">
+        <ul className="menu bg-color min-h-full w-60 p-4 font-bold hover:bg-[#00bcd5] text-[#516668]">
           {/* Sidebar content here */}
-          <li className="w-30 h-30">
+          <li className="my-1 hover:bg-[#07daf676] hover:text-white">
             <Logo></Logo>
           </li>
-          <li>
+          <li className="my-1 hover:bg-[#07daf676] hover:text-white">
             <NavLink to="/partiDashboard/analytics">Analytics</NavLink>
           </li>
-          <li>
+          <li className="my-1 hover:bg-[#07daf676] hover:text-white">
             <NavLink to="/partiDashboard/participantProfile">
               Participant Profile
             </NavLink>
           </li>
-          <li>
+          <li className="my-1 hover:bg-[#07daf676] hover:text-white">
             <NavLink to="/partiDashboard/registeredCamps">
               Registered Camps
             </NavLink>
           </li>
-          <li>
-            <NavLink to="/partiDashboard/paymentHistory">
-              Payment History
+          
+           <li className="my-1 hover:bg-[#07daf676] hover:text-white">
+            <NavLink to="/partiDashboard/participantPayment">
+              Participant Payment
+            </NavLink>
+          </li>
+          <li className="my-1 hover:bg-[#07daf676] hover:text-white">
+            <NavLink to="/partiDashboard/userPaymentHistory">
+              Participant Payment History
             </NavLink>
           </li>
            { !roleLoading && role ==='organizer' &&
            <>
-           <li>
+           <li className="my-1 hover:bg-[#07daf676] hover:text-white">
             <NavLink to="/partiDashboard/activeParticipant">
               Active Participants
             </NavLink>
           </li>
 
-          <li>
+          <li className="my-1 hover:bg-[#07daf676] hover:text-white">
             <NavLink to="/partiDashboard/pendingParticipants">
               Pending Participants
             </NavLink>
           </li>
+         
            </>
            }
           

@@ -7,7 +7,7 @@ const DashboardLayout = () => {
   const { role, roleLoading } = useUserRole();
   console.log(role);
   return (
-    <div className="drawer lg:drawer-open">
+    <div className="drawer lg:drawer-open bg-[ #00a4b9]">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col">
         <div className="navbar bg-base-300 w-full  lg:hidden">
@@ -44,37 +44,37 @@ const DashboardLayout = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu bg-base-200 min-h-full w-80 p-4">
+        <ul className="menu bg-color min-h-full w-70 p-4 font-bold hover:bg-[#00bcd5] text-[#516668]">
           {/* Sidebar content here */}
-          <li className="w-30 h-30">
+          <li className="my-1 hover:bg-[#07daf676] hover:text-white">
             <Logo></Logo>
           </li>
-          <li>
+          <li className="my-1 hover:bg-[#07daf676] hover:text-white">
             <NavLink to="/orgDashboard/organizer-profile">
               Organizer Profile
             </NavLink>
           </li>
-          <li>
+          <li className="my-1 hover:bg-[#07daf676] hover:text-white">
             <NavLink to="/orgDashboard/addCamp">Add A Camp</NavLink>
           </li>
           { !roleLoading && role ==='organizer' &&
             <>
-              <li>
+              <li className="my-1 hover:bg-[#07daf676] hover:text-white">
                 <NavLink to="/orgDashboard/make-organizer">
                   Make Organizer
                 </NavLink>
               </li>
-              <li>
+              <li className="my-1 hover:bg-[#07daf676] hover:text-white">
                 <NavLink to="/orgDashboard/manageCamps">Manage Camps</NavLink>
               </li>
-              <li>
+              <li className="my-1 hover:bg-[#07daf676] hover:text-white">
                 <NavLink to="/orgDashboard/manageRegisteredCamps">
                   Manage Registered Camps
                 </NavLink>
               </li>
-              <li>
-                <NavLink to="/orgDashboard/payment">
-                  Payment
+              <li className="my-1 hover:bg-[#07daf676] hover:text-white">
+                <NavLink to="/orgDashboard/paymentHistory">
+                  Payment History
                 </NavLink>
               </li>
             </>
