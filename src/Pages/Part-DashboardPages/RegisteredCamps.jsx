@@ -5,12 +5,16 @@ import useAuth from "../../hooks/useAuth";
 import useAxios from "../../hooks/useAxios";
 
 const RegisteredCamps = () => {
-  const axiosInstance = useAxios();
   const { user } = useAuth();
+  const axiosInstance = useAxios();
   const navigate = useNavigate();
 
-  const { data: registrations = [], refetch, isLoading } = useQuery({
-    queryKey: ["registrations", user?.email],
+  const {
+    data: registrations = [],
+    refetch,
+    isLoading,
+  } = useQuery({
+    queryKey: ["registeredCamps", user?.email],
     enabled: !!user?.email,
     queryFn: async () => {
       const res = await axiosInstance.get(
@@ -20,32 +24,32 @@ const RegisteredCamps = () => {
     },
   });
 
-  const handleCancel = (item) => {
-    Swal.fire({
+  // ❌ Cancel registration
+  const handleCancel = async (item) => {
+    const result = await Swal.fire({
       title: "Are you sure?",
       text: "This registration will be removed!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "Yes, cancel it",
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        await axiosInstance.delete(
-          `/participants/registered/${item.campId}`
-        );
-        refetch();
-        Swal.fire("Cancelled!", "Registration removed.", "success");
-      }
     });
+
+    if (result.isConfirmed) {
+      await axiosInstance.delete(
+        `/participants/registered/${item.campId}`
+      );
+      refetch();
+      Swal.fire("Cancelled!", "Registration removed.", "success");
+    }
   };
 
-  // 👉 Navigate to feedback page
-  const handleFeedback = (item) => {
-    navigate(`/dashboard/feedback/${item.campId}`, {
-      state: item,
-    });
-  };
-
-  if (isLoading) return <p className="text-center mt-10">Loading...</p>;
+  // 👉 Go to feedback page
+ const handleFeedback = (item) => {
+  navigate(`/dashboard/feedback/${item._id}`);
+};
+  if (isLoading) {
+    return <p className="text-center mt-10">Loading...</p>;
+  }
 
   return (
     <div className="max-w-6xl mx-auto mt-10 bg-white p-6 rounded-lg shadow mb-10">
@@ -53,8 +57,8 @@ const RegisteredCamps = () => {
         Registered Camps
       </h2>
 
-      <div className="overflow-x-auto rounded-2xl">
-        <table className="table table-zebra w-full bg-color">
+      <div className="overflow-x-auto">
+        <table className="table table-zebra w-full">
           <thead className="bg-[#00bcd5] text-white">
             <tr>
               <th>#</th>
@@ -63,7 +67,7 @@ const RegisteredCamps = () => {
               <th>Participant</th>
               <th>Payment</th>
               <th>Confirmation</th>
-              <th>Action</th>
+              <th>Cancel</th>
               <th>Feedback</th>
             </tr>
           </thead>
@@ -71,6 +75,8 @@ const RegisteredCamps = () => {
           <tbody>
             {registrations.map((item, index) => {
               const isPaid = item.paymentStatus === "paid";
+              const isConfirmed =
+                item.confirmationStatus === "confirmed";
 
               return (
                 <tr key={item._id}>
@@ -79,48 +85,55 @@ const RegisteredCamps = () => {
                   <td>${item.campFees}</td>
                   <td>{item.participantName}</td>
 
+                  {/* Payment */}
                   <td>
                     <span
                       className={`badge ${
-                        isPaid ? "bg-lime-300" : "bg-yellow-300"
+                        isPaid ? "badge-success" : "badge-warning"
                       }`}
                     >
                       {item.paymentStatus}
                     </span>
                   </td>
 
+                  {/* Confirmation */}
                   <td>
-                    {item.confirmationStatus === "pending" ? (
-                      <span className="badge bg-yellow-300">Pending</span>
-                    ) : (
-                      <span className="badge bg-lime-500">Confirmed</span>
-                    )}
+                    <span
+                      className={`badge ${
+                        isConfirmed
+                          ? "badge-success"
+                          : "badge-warning"
+                      }`}
+                    >
+                      {item.confirmationStatus}
+                    </span>
                   </td>
 
+                  {/* Cancel */}
                   <td>
                     <button
                       onClick={() => handleCancel(item)}
-                      disabled={
-                        isPaid && item.confirmationStatus === "confirmed"
-                      }
-                      className="btn btn-xs bg-red-600 text-black"
+                      disabled={isPaid && isConfirmed}
+                      className="btn btn-xs btn-error"
                     >
                       Cancel
                     </button>
                   </td>
 
-                  {/* ✅ Feedback button */}
+                  {/* Feedback */}
                   <td>
-                    {isPaid ? (
+                    {isPaid && isConfirmed ? (
                       <button
-                        onClick={() => handleFeedback(item)}
+                        onClick={() =>
+                          handleFeedback(item.campId)
+                        }
                         className="btn btn-xs bg-[#00bcd5] text-white"
                       >
                         Feedback
                       </button>
                     ) : (
                       <span className="text-gray-400 text-xs">
-                        Pay first
+                        Not Available
                       </span>
                     )}
                   </td>

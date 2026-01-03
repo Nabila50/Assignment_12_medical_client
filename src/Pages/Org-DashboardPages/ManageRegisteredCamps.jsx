@@ -2,13 +2,14 @@ import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
+import useAxios from "../../hooks/useAxios";
 
 const ManageRegisteredCamps = () => {
-  const axiosSecure = useAxiosSecure();
+  const axiosSecure = useAxios();
   const { user } = useAuth();
 
   const {
-    data: participants = [],
+    data: participants = [],  
     refetch,
     isLoading,
   } = useQuery({
@@ -48,6 +49,7 @@ const ManageRegisteredCamps = () => {
         <table className="table table-zebra">
           <thead className="bg-base-300">
             <tr>
+              <th>#</th>
               <th>Participant</th>
               <th>Email</th>
               <th>Camp</th>
@@ -58,8 +60,9 @@ const ManageRegisteredCamps = () => {
           </thead>
 
           <tbody>
-            {participants.map((p) => (
+            {participants.map((p, index) => (
               <tr key={p._id}>
+                <td>{index+1}</td>
                 <td>{p.participantName}</td>
                 <td>{p.participantEmail}</td>
                 <td>{p.campName}</td>

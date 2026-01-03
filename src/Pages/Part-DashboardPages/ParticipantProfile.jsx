@@ -4,11 +4,12 @@ import Modal from "react-modal";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
+import useAxios from "../../hooks/useAxios";
 
 Modal.setAppElement("#root");
 
 const ParticipantProfile = () => {
-  const axiosSecure = useAxiosSecure();
+  const axiosInstance = useAxios();
   const { user } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({});
@@ -22,7 +23,7 @@ const ParticipantProfile = () => {
     queryKey: ["participantProfile", user?.email],
     enabled: !!user?.email,
     queryFn: async () => {
-      const res = await axiosSecure.get(`/participants/profile/${user.email}`);
+      const res = await axiosInstance.get(`/participants/profile/${user.email}`);
       return res.data;
     },
   });
@@ -50,7 +51,7 @@ const ParticipantProfile = () => {
       image: formData.image,
       location: formData.location,
       age: formData.age,
-      organizerEmail: camp.organizerEmail, // ✅ ADD THIS
+      organizerEmail: camp.organizerEmail, 
       organizerName: camp.organizerName,
       participantName: user.displayName,
       participantEmail: user.email,
