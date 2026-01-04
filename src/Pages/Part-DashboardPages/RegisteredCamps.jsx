@@ -45,7 +45,7 @@ const RegisteredCamps = () => {
 
   // 👉 Go to feedback page
  const handleFeedback = (item) => {
-  navigate(`/dashboard/feedback/${item._id}`);
+  navigate(`/partiDashboard/feedback/${item._id}`);
 };
   if (isLoading) {
     return <p className="text-center mt-10">Loading...</p>;
@@ -89,7 +89,7 @@ const RegisteredCamps = () => {
                   <td>
                     <span
                       className={`badge ${
-                        isPaid ? "badge-success" : "badge-warning"
+                        isPaid ? "bg-lime-500" : "bg-yellow-300"
                       }`}
                     >
                       {item.paymentStatus}
@@ -101,8 +101,8 @@ const RegisteredCamps = () => {
                     <span
                       className={`badge ${
                         isConfirmed
-                          ? "badge-success"
-                          : "badge-warning"
+                          ? "bg-lime-500"
+                          : "bg-yellow-300"
                       }`}
                     >
                       {item.confirmationStatus}
@@ -114,7 +114,7 @@ const RegisteredCamps = () => {
                     <button
                       onClick={() => handleCancel(item)}
                       disabled={isPaid && isConfirmed}
-                      className="btn btn-xs btn-error"
+                      className="btn btn-xs bg-red-500 text-white"
                     >
                       Cancel
                     </button>
@@ -125,7 +125,7 @@ const RegisteredCamps = () => {
                     {isPaid && isConfirmed ? (
                       <button
                         onClick={() =>
-                          handleFeedback(item.campId)
+                          handleFeedback(item)
                         }
                         className="btn btn-xs bg-[#00bcd5] text-white"
                       >

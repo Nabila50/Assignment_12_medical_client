@@ -73,8 +73,8 @@ const ManageRegisteredCamps = () => {
                   <span
                     className={`badge ${
                       p.paymentStatus === "paid"
-                        ? "badge-success"
-                        : "badge-error"
+                        ? "bg-lime-500"
+                        : "bg-red-500"
                     }`}
                   >
                     {p.paymentStatus}
@@ -84,12 +84,12 @@ const ManageRegisteredCamps = () => {
                 {/* Confirmation */}
                 <td>
                   {p.confirmationStatus === "confirmed" ? (
-                    <span className="badge badge-success">Confirmed</span>
+                    <span className="badge bg-lime-500">Confirmed</span>
                   ) : (
                     <button
                       onClick={() => handleConfirm(p._id)}
                       disabled={p.paymentStatus !== "paid"}
-                      className="btn btn-xs btn-warning"
+                      className="btn btn-xs bg-yellow-300"
                     >
                       Pending
                     </button>

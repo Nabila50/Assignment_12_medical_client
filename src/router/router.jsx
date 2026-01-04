@@ -81,10 +81,7 @@ export const router = createBrowserRouter([
         path: "register",
         Component: Register,
       },
-      {
-        path: 'dashboard/feedback/:id',
-        Component: FeedbackRating,
-      },
+      
     ],
   },
   {
@@ -156,6 +153,10 @@ export const router = createBrowserRouter([
       {
         path: 'participantPayment',
         Component: ParticipantPayment
+      },
+      {
+        path: 'feedback/:id',
+        element: <FeedbackRating></FeedbackRating>,
       },
       
       {
