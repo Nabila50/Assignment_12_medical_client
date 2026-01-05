@@ -24,13 +24,13 @@ const Navbar = () => {
   };
   const navItems = (
     <>
-      <li className="link-hover text-[#00bcd5] font-bold">
+      <li className="link-hover text-[#00bcd5] font-bold text-base">
         <NavLink to="/">Home</NavLink>
       </li>
-      <li className="link-hover text-[#00bcd5] font-bold">
+      <li className="link-hover text-[#00bcd5] font-bold text-base">
         <NavLink to="availableCamps">Available Camps</NavLink>
       </li>
-      <li className="link-hover text-[#00bcd5] font-bold">
+      <li className="link-hover text-[#00bcd5] font-bold text-base">
         <NavLink to="beAParticipant">Join Us </NavLink>
       </li>
      
@@ -39,14 +39,14 @@ const Navbar = () => {
         <>
         {!roleLoading && role ==='organizer' &&  (
         <>
-          <li className="link-hover text-[#00bcd5] font-bold">
+          <li className="link-hover text-[#00bcd5] font-bold text-base">
             <NavLink to="/orgDashboard/organizer-profile">Organizer Dashboard </NavLink>
           </li>   
            
         </>
       )}
 
-        <li className="link-hover text-[#00bcd5] font-bold">
+        <li className="link-hover text-[#00bcd5] font-bold text-base">
         <NavLink to="/partiDashboard/analytics">Participant Dashboard </NavLink>
       </li> 
         </>

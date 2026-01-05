@@ -20,7 +20,7 @@ const PopularCamps = () => {
 
  
   return (
-    <div className="py-16 bg-base-100">
+    <div className="py-10 bg-base-100">
       <div className="container mx-auto px-6">
         <h2 className="text-3xl font-bold text-center mb-10  text-[#00bcd5] ">
           Popular Medical Camps
