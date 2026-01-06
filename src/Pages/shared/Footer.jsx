@@ -62,8 +62,8 @@ const Footer = () => {
         </div>
       </footer>
 
-      <div className="bg-[#343434] text-center p-5 border-t  text-sm   text-white">
-        © {new Date().getFullYear()} YourWebsite — All Rights Reserved.
+      <div className="bg-[#00bcd5] text-center pt-5 border-t  text-sm text-white">
+        © {new Date().getFullYear()} Medical Care — All Rights Reserved.
       </div>
     </div>
   );
