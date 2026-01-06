@@ -2,23 +2,22 @@ import { Link } from "react-router";
 import React, { useEffect, useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import useAxios from "../../hooks/useAxios";
+import useAuth from "../../hooks/useAuth";
 
 const PopularCamps = () => {
-  const [camps, setCamps] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const axiosSecure = useAxios();
+  const { user } = useAuth();
 
-  // const axiosSecure = useAxiosSecure();
-
-  useEffect(() => {
-    // Fetch top 6 most popular camps
-    fetch("http://localhost:5000/addCamps/all")
-      .then(res => res.json())
-      .then(data => setCamps(data))
-      .catch(err => console.error(err));
-  }, []);
-
- 
+  const { data: camps = {}, isLoading } = useQuery({
+    queryKey: ["allCamps"],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/addCamps/all`);
+      return res.data;
+    },
+  });
+  if (isLoading)
+    return <span className="loading loading-dots loading-xl"></span>;
   return (
     <div className="py-10 bg-base-100">
       <div className="container mx-auto px-6">
@@ -77,7 +76,10 @@ const PopularCamps = () => {
         </div>
 
         <div className="text-center mt-10">
-          <Link to="/availableCamps" className="btn bg-[#00bcd5] text-white w-full mt-4">
+          <Link
+            to="/availableCamps"
+            className="btn bg-[#00bcd5] text-white w-full mt-4"
+          >
             See All Camps
           </Link>
         </div>

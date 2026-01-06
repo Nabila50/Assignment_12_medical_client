@@ -13,7 +13,7 @@ const ManageCamps = () => {
   const email = user?.email;
 
   // Fetch camps of logged-in organizer
-  const { data: camps = [], refetch } = useQuery({
+  const { data: camps = [], refetch, isLoading } = useQuery({
     queryKey: ["my-camps", email],
     enabled: !!email,
     queryFn: async () => {
@@ -60,6 +60,8 @@ const ManageCamps = () => {
 const handleUpdate = (id) => {
   navigate(`/orgDashboard/update-camp/${id}`);
 };
+
+if (isLoading) return <span className="loading loading-dots loading-xl"></span>;
 
   return (
     <div className="p-6">

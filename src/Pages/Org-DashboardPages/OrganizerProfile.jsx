@@ -20,8 +20,7 @@ const OrganizerProfile = () => {
 
   const [editing, setEditing] = useState(false);
   const [formData, setFormData] = useState({});
-
-  // ✅ sync data
+ 
   useEffect(() => {
     setFormData(organizer);
   }, [organizer]);
@@ -38,7 +37,7 @@ const OrganizerProfile = () => {
     }
   };
 
-  if (isLoading) return <p className="text-center mt-10">Loading...</p>;
+  if (isLoading) return <span className="loading loading-dots loading-xl bg-color"></span>;
 
   return (
     <div className="max-w-3xl mx-auto bg-white p-6 rounded-lg mt-10 shadow-md">

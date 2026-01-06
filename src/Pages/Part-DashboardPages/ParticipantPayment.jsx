@@ -50,7 +50,7 @@ const { data: payments = [], isLoading } = useQuery({
     }
   };
 
-  if (isLoading) return <p className="text-center mt-10">Loading...</p>;
+  if (isLoading) return <span className="loading loading-dots loading-xl"></span>;
 
   return (
     <div className="w-full mx-auto mt-10 px-5 mb-10 ">

@@ -48,7 +48,7 @@ const RegisteredCamps = () => {
   navigate(`/partiDashboard/feedback/${item._id}`);
 };
   if (isLoading) {
-    return <p className="text-center mt-10">Loading...</p>;
+    return <span className="loading loading-dots loading-xl"></span>;
   }
 
   return (

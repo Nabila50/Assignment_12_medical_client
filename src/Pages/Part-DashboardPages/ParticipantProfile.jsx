@@ -83,7 +83,7 @@ const ParticipantProfile = () => {
     }
   };
 
-  if (isLoading) return <p className="text-center mt-10">Loading profile...</p>;
+  if (isLoading) return <span className="loading loading-dots loading-xl"></span>;
 
   return (
     <div className="w-130 h-100 max-w-7xl mx-auto p-12 bg-color rounded-xl shadow-lg my-20">
