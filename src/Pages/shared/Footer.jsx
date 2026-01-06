@@ -62,7 +62,7 @@ const Footer = () => {
         </div>
       </footer>
 
-      <div className="bg-[#00bcd5] text-center pt-5 border-t  text-sm text-white">
+      <div className="bg-[#00bcd5] text-center p-5 border-t  text-sm text-white">
         © {new Date().getFullYear()} Medical Care — All Rights Reserved.
       </div>
     </div>
