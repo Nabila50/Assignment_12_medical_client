@@ -89,7 +89,7 @@ const AvailableCamps = () => {
         }`}
       >
         {filteredCamps.map((camp) => (
-          <div key={camp._id} className="card bg-base-200 shadow-xl p-4">
+          <div key={camp._id} className="card bg-base-300 shadow-xl p-4">
             <img
               src={camp.image || "/placeholder.jpg"}
               alt={camp.campName}

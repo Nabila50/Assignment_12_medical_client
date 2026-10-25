@@ -39,7 +39,7 @@ const PopularCamps = () => {
                 />
               </figure>
 
-              <div className="card-body">
+              <div className="card-body text-black">
                 <h3 className="card-title text-[#00bcd5] font-bold">
                   {camp.campName}
                 </h3>
@@ -65,7 +65,7 @@ const PopularCamps = () => {
                 <div className="card-actions justify-end mt-4">
                   <Link
                     to={`/camp-details/${camp._id}`}
-                    className="btn bg-[#00bcd5] text-white font-extrabold mt-4"
+                    className="btn btn-color"
                   >
                     View Details
                   </Link>

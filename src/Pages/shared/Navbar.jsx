@@ -122,10 +122,10 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            <Link to="/login" className="btn bg-[#00bcd5] text-white">
+            <Link to="/login" className="btn btn-color">
               Login
             </Link>
-            <Link to="/register" className="btn bg-[#00bcd5] text-white">
+            <Link to="/register" className="btn btn-color">
               Register{" "}
             </Link>
           </>

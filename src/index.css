@@ -14,8 +14,10 @@
 
 .btn-color{
   background-color: #00bcd5;
-  color: white;
-   border: 1px solid #00a4b9 ;
+  color: black;
+  border: 0px;
+  box-shadow: none;
+
 }
 .bg-color{
   background-color: #d1f0f4;

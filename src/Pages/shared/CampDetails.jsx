@@ -87,7 +87,7 @@ const CampDetails = () => {
     );
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-sky-50 rounded-lg mt-10">
+    <div className="max-w-3xl mx-auto p-6 bg-sky-50 rounded-lg mt-10 text-black">
       <img
         src={camp.image}
         alt={camp.campName}
@@ -310,7 +310,7 @@ const CampDetails = () => {
           </>
         ) : (
           <>
-            <NavLink to="/register" className="btn bg-[#00bcd5] text-white w-full"> First Register Yourself</NavLink>
+            <NavLink to="/register" className="btn btn-color"> First Register Yourself</NavLink>
           </>
         )}
       </div>
