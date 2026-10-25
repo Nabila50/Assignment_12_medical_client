@@ -16,6 +16,7 @@ const Navbar = () => {
           title: "Logged Out!",
           text: "LogOut Successfully",
           icon: "success",
+          color: "sky-300"
         });
       })
       .catch((error) => {
@@ -101,7 +102,7 @@ const Navbar = () => {
             <div className="relative inline-block">
               {/* Image */}
               <img
-                className="w-10 h-10 rounded-full"
+                className="w-10 h-10 rounded-full border-sky-300 border-1"
                 src={user?.photoURL}
                 alt=""
               />
@@ -115,7 +116,7 @@ const Navbar = () => {
             
             <button
               onClick={handleLogOut}
-              className="btn bg-[#00bcd5] text-white"
+              className="btn btn-color"
             >
               LogOut
             </button>

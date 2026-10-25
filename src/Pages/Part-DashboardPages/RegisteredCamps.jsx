@@ -52,14 +52,14 @@ const RegisteredCamps = () => {
   }
 
   return (
-    <div className="max-w-6xl mx-auto mt-10 bg-white p-6 rounded-lg shadow mb-10">
+    <div className="max-w-6xl mx-auto mt-10 bg-white p-6 rounded-lg shadow mb-10 text-bl">
       <h2 className="text-3xl font-bold text-[#00bcd5] mb-6">
         Registered Camps
       </h2>
 
       <div className="overflow-x-auto">
-        <table className="table table-zebra w-full">
-          <thead className="bg-[#00bcd5] text-white">
+        <table className="table w-full">
+          <thead className="bg-[#00bcd5] text-black">
             <tr>
               <th>#</th>
               <th>Camp Name</th>
@@ -72,7 +72,7 @@ const RegisteredCamps = () => {
             </tr>
           </thead>
 
-          <tbody>
+          <tbody className="text-black">
             {registrations.map((item, index) => {
               const isPaid = item.paymentStatus === "paid";
               const isConfirmed =
@@ -89,8 +89,8 @@ const RegisteredCamps = () => {
                   <td>
                     <span
                       className={`badge ${
-                        isPaid ? "bg-lime-500" : "bg-yellow-300"
-                      }`}
+                        isPaid ? "bg-lime-500" : "bg-red-300"
+                      } border-0 shadow-none text-black`}
                     >
                       {item.paymentStatus}
                     </span>
@@ -103,7 +103,7 @@ const RegisteredCamps = () => {
                         isConfirmed
                           ? "bg-lime-500"
                           : "bg-yellow-300"
-                      }`}
+                      } border-0 shadow-none text-black`}
                     >
                       {item.confirmationStatus}
                     </span>
@@ -114,7 +114,7 @@ const RegisteredCamps = () => {
                     <button
                       onClick={() => handleCancel(item)}
                       disabled={isPaid && isConfirmed}
-                      className="btn btn-xs bg-red-500 text-white"
+                      className="btn btn-xs bg-red-500 border-0 shadow-none text-black"
                     >
                       Cancel
                     </button>

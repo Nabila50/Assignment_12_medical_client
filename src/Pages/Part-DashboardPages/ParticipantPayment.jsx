@@ -58,10 +58,10 @@ const { data: payments = [], isLoading } = useQuery({
         Pay for Camp Registration
       </h2>
 
-      <div className="overflow-x-auto rounded-2xl">
-        <table className="table table-zebra bg-color  ">
+      <div className="overflow-x-auto rounded-2xl text-black">
+        <table className="table bg-color">
           <thead className="bg-[#00bcd5]">
-            <tr className="rounded-2xl">
+            <tr className="rounded-2xl text-white">
               <th>Participant</th>
               <th>Participant Email</th>
               <th>Camp Name</th>
@@ -92,7 +92,7 @@ const { data: payments = [], isLoading } = useQuery({
                         p.paymentStatus === "paid"
                           ? "bg-lime-500"
                           : "bg-red-500"
-                      }`}
+                      } border-0 shadow-none text-black`}
                     >
                       {p.paymentStatus}
                     </span>
@@ -101,9 +101,9 @@ const { data: payments = [], isLoading } = useQuery({
                   {/* Confirmation Status */}
                   <td>
                     {p.confirmationStatus === "pending" ? (
-                      <span className="badge bg-yellow-300">Pending</span>
+                      <span className="badge bg-yellow-300 border-0 shadow-none text-black">Pending</span>
                     ) : (
-                      <span className="badge bg-lime-500">Confirmed</span>
+                      <span className="badge bg-lime-500 border-0 shadow-none text-black">Confirmed</span>
                     )}
                   </td>
 
@@ -112,7 +112,7 @@ const { data: payments = [], isLoading } = useQuery({
                     {/* View */}
                     <button
                       onClick={() => console.log("View", p._id)}
-                      className="btn btn-xs btn-info text-white"
+                      className="btn btn-xs btn-info border-0 shadow-none text-black"
                     >
                       View
                     </button>
@@ -131,7 +131,7 @@ const { data: payments = [], isLoading } = useQuery({
                     <button
                       onClick={() => handleCancel(p._id)}
                       disabled={isLocked}
-                      className="btn btn-xs bg-red-500 text-white"
+                      className="btn btn-xs bg-red-500 border-0 shadow-none text-black"
                     >
                       Delete
                     </button>

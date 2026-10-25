@@ -86,7 +86,7 @@ const ParticipantProfile = () => {
   if (isLoading) return <span className="loading loading-dots loading-xl"></span>;
 
   return (
-    <div className="w-130 h-100 max-w-7xl mx-auto p-12 bg-color rounded-xl shadow-lg my-20">
+    <div className="w-130 h-100 max-w-7xl mx-auto p-12 bg-color rounded-xl shadow-lg my-20 text-base-200">
       <h2 className="text-3xl font-bold mb-4">My Profile</h2>
 
       <div className="flex items-center gap-6">
